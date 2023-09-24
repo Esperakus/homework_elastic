@@ -17,3 +17,8 @@ ${hostname}
 %{ for hostname in db_hosts ~}
 ${hostname}
 %{ endfor ~}
+
+[els_hosts]
+%{ for hostname in els_hosts }
+${hostname}
+%{ endfor }
