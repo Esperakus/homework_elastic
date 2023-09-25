@@ -4,6 +4,25 @@
   roles:
     - { role: general-el8, become: true }
     
+- hosts: els_hosts
+  roles:
+    - elasticsearch
+  vars:
+    es_heap_size: "2g"
+    es_config:
+      cluster.name: "els"
+      network.host: 0
+      cluster.initial_master_nodes: "els0,els1,els2"
+      discovery.seed_hosts: "els0:9300,els2:9300,els2:9300"
+      http.port: 9200
+      node.data: true
+      node.master: true
+      node.ingest: false
+      node.ml: false
+      cluster.remote.connect: false
+      bootstrap.memory_lock: true
+  become: true 
+
 - hosts: db_hosts
   roles:
     - { role: postgresql, become: true }

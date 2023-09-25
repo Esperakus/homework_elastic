@@ -19,6 +19,6 @@ ${hostname}
 %{ endfor ~}
 
 [els_hosts]
-%{ for hostname in els_hosts }
+%{ for hostname in els_hosts ~}
 ${hostname}
-%{ endfor }
+%{ endfor ~}

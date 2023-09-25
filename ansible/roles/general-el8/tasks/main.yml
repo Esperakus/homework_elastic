@@ -67,3 +67,9 @@
   - name: disable selinux
     selinux:
       state: disabled
+
+  - name: set locale
+    lineinfile:
+      path: /etc/locale.conf
+      state: present
+      line: LC_ALL="en_US.UTF-8"

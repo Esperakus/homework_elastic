@@ -11,7 +11,7 @@ resource "yandex_compute_instance" "els" {
 
   boot_disk {
     initialize_params {
-      image_id = var.image_id
+      image_id = var.image_deb
     }
   }
 
@@ -21,7 +21,7 @@ resource "yandex_compute_instance" "els" {
   }
 
   metadata = {
-    ssh-keys = "cloud-user:${tls_private_key.ssh.public_key_openssh}"
+    ssh-keys = "ubuntu:${tls_private_key.ssh.public_key_openssh}"
   }
 
 }

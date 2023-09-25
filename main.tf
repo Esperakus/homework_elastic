@@ -44,7 +44,7 @@ resource "local_file" "hosts" {
       db_hosts      = yandex_compute_instance.db.*.hostname
       nginx_hosts   = yandex_compute_instance.nginx.*.hostname
       backend_hosts = yandex_compute_instance.backend.*.hostname
-      els_hosts = yandex_compute_instance.els.*.hostname
+      els_hosts     = yandex_compute_instance.els.*.hostname
 
   })
   depends_on = [
@@ -53,6 +53,5 @@ resource "local_file" "hosts" {
     yandex_compute_instance.nginx,
     yandex_compute_instance.backend,
     yandex_compute_instance.els
-  
   ]
 }
