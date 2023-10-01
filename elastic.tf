@@ -8,10 +8,12 @@ resource "yandex_compute_instance" "els" {
     cores  = 2
     memory = 4
   }
-
+  scheduling_policy {
+    preemptible = true
+  }
   boot_disk {
     initialize_params {
-      image_id = var.image_deb
+      image_id = var.image_id
     }
   }
 
@@ -21,7 +23,7 @@ resource "yandex_compute_instance" "els" {
   }
 
   metadata = {
-    ssh-keys = "ubuntu:${tls_private_key.ssh.public_key_openssh}"
+    ssh-keys = "cloud-user:${tls_private_key.ssh.public_key_openssh}"
   }
 
 }

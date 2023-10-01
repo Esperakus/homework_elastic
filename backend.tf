@@ -4,6 +4,10 @@ resource "yandex_compute_instance" "backend" {
   name     = "backend${count.index}"
   hostname = "backend${count.index}"
 
+  scheduling_policy {
+    preemptible = true
+  }
+
   resources {
     cores  = 2
     memory = 2

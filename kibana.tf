@@ -1,11 +1,12 @@
-resource "yandex_compute_instance" "iscsi" {
+resource "yandex_compute_instance" "kibana" {
 
-  name     = "iscsi"
-  hostname = "iscsi"
+  # count    = 1
+  name     = "kibana"
+  hostname = "kibana"
 
   resources {
     cores  = 2
-    memory = 2
+    memory = 4
   }
 
   scheduling_policy {
@@ -18,11 +19,6 @@ resource "yandex_compute_instance" "iscsi" {
     }
   }
 
-  secondary_disk {
-    disk_id     = yandex_compute_disk.iscsi.id
-    device_name = "iscsi_disk"
-  }
-
   network_interface {
     subnet_id = yandex_vpc_subnet.subnet01.id
     # nat       = true
@@ -32,9 +28,4 @@ resource "yandex_compute_instance" "iscsi" {
     ssh-keys = "cloud-user:${tls_private_key.ssh.public_key_openssh}"
   }
 
-}
-
-resource "yandex_compute_disk" "iscsi" {
-  name = "iscsi-target"
-  size = 2
 }

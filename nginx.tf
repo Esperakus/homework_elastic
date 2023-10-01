@@ -9,6 +9,10 @@ resource "yandex_compute_instance" "nginx" {
     memory = 2
   }
 
+  scheduling_policy {
+    preemptible = true
+  }
+
   boot_disk {
     initialize_params {
       image_id = var.image_id

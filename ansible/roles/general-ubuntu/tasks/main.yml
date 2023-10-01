@@ -1,0 +1,55 @@
+---
+# tasks file for general
+
+  - name: set timezone msk
+    timezone:
+      name: Europe/Moscow
+
+  - name: Upgrade all
+    apt:
+      name: '*'
+      state: latest
+      update_cache: true
+
+  - name: Setup after install
+    apt:
+      name: "{{ packages}} "
+      state: present
+    vars:
+      packages:
+        # - openssl-devel
+        # - bzip2-devel
+        # - libffi-devel
+        - nano
+        - git
+        - bash-completion
+        - logwatch
+        - lsscsi
+        - mc
+        - mlocate
+        - mtr
+        # - nfs-utils
+        - parted
+        - pciutils
+        - pinfo
+        - policycoreutils-python-utils
+        - rsync
+        - sysstat
+        - telnet
+        - unzip
+        - wget
+        - net-tools
+        # - yum-utils
+        - htop
+        # - device-mapper-persistent-data
+        - lvm2
+        - lsof
+        - gcc
+        # - hyperv-daemons
+        - nmap
+        - iftop
+        - atop
+        - vim
+        # - python3-firewall
+        - fping
+        - ncdu

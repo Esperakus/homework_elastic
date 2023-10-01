@@ -8,6 +8,10 @@ resource "yandex_compute_instance" "db" {
     memory = 4
   }
 
+  scheduling_policy {
+    preemptible = true
+  }
+
   boot_disk {
     initialize_params {
       image_id = var.image_id
