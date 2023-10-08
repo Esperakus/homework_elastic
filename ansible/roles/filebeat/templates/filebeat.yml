@@ -1,0 +1,20 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+      - /var/log/nginx/*.log
+  fields:
+    type: nginx_logs
+  fields_under_root: true
+  scan_frequency: 5s
+
+- type: journald
+  enabled: true
+  id: go_web
+  fields:
+    type: go_web_journald
+  fields_under_root: true
+  scan_frequency: 5s
+
+output.logstash:
+  hosts: ["kibana:5044"]

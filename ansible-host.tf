@@ -38,6 +38,7 @@ resource "yandex_compute_instance" "ansible" {
     inline = [
       "echo 'host is up'",
       "sudo dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm",
+      "sudo dnf install wget -y",
       "sudo dnf update -y",
       "sudo dnf install -y ansible"
     ]
@@ -71,6 +72,9 @@ resource "yandex_compute_instance" "ansible" {
 
   provisioner "remote-exec" {
     inline = [
+      "wget -P ansible/roles/kibana/files https://mirrors.huaweicloud.com/kibana/7.15.1/kibana-7.15.1-x86_64.rpm",
+      "wget -P ansible/roles/elasticsearch/files https://mirrors.huaweicloud.com/elasticsearch/7.15.1/elasticsearch-7.15.1-x86_64.rpm",
+      "wget -P ansible/roles/logstash/files https://mirrors.huaweicloud.com/logstash/7.17.2/logstash-7.17.2-x86_64.rpm",
       "ansible-playbook -u cloud-user -i /home/cloud-user/ansible/hosts /home/cloud-user/ansible/playbooks/main.yml",
     ]
   }
@@ -80,6 +84,7 @@ resource "yandex_compute_instance" "ansible" {
     yandex_compute_instance.db,
     yandex_compute_instance.iscsi,
     yandex_compute_instance.backend,
-    yandex_compute_instance.els
+    yandex_compute_instance.els,
+    yandex_compute_instance.kibana
   ]
 }

@@ -21,7 +21,7 @@ resource "yandex_compute_instance" "kibana" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.subnet01.id
-    # nat       = true
+    nat       = true
   }
 
   metadata = {

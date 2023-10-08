@@ -2,8 +2,13 @@
 # tasks file for kibana
 - name: copy rpm to tmp
   copy:
-    src: files/kibana-7.17.8-x86_64.rpm
-    dest: /tmp/kibana-7.17.8-x86_64.rpm
+    src: files/kibana-7.15.1-x86_64.rpm
+    dest: /tmp/kibana-7.15.1-x86_64.rpm
+
+# - name: download rpm
+#   get_url:
+#     url: https://mirrors.huaweicloud.com/kibana/7.9.3/kibana-7.9.3-x86_64.rpm
+#     dest: /tmp
 
 - name: Install Kibana.
   dnf:
@@ -13,7 +18,7 @@
 
 - name: Ensure Kibana is started and enabled at boot.
   service:
-    name: kibana
+    name: "{{ kibana_service }}"
     state: "{{ kibana_service_state }}"
     enabled: "{{ kibana_service_enabled }}"
 

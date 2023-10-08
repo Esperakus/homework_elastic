@@ -3,12 +3,13 @@
 - hosts: all
   roles:
     - { role: general-el8, become: true }
+    - { role: filebeat, become: true }
     
 - hosts: els_hosts
   roles:
     - elasticsearch
   vars:
-    es_custom_package_url: "/tmp/elasticsearch-7.17.13-x86_64.rpm"
+    es_custom_package_url: "/tmp/elasticsearch-7.15.1-x86_64.rpm"
     es_use_repository: false
     es_heap_size: "2g"
     es_config:
@@ -25,6 +26,11 @@
       cluster.remote.connect: false
       bootstrap.memory_lock: false
   become: true 
+
+- hosts: kibana
+  roles:
+    - { role: kibana, become: true }
+    - { role: logstash, become: true }
 
 - hosts: db_hosts
   roles:

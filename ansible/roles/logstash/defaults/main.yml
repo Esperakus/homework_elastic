@@ -1,0 +1,19 @@
+---
+# defaults file for logstash
+logstash_version: "7.x"
+
+logstash_package: /tmp/logstash-7.17.2-x86_64.rpm
+logstash_package_state: present
+
+logstash_service: logstash
+logstash_service_state: started
+logstash_service_enabled: true
+
+logstash_config_template: logstash.yml.j2
+logstash_config_file_path: /etc/logstash/logstash.yml
+
+logstash_server_port: 5044
+logstash_server_host: "0.0.0.0"
+logstash_elasticsearch_url: ["http://els0:9200","http://els1:9200","http://els2:9200"]
+logstash_elasticsearch_username: ""
+logstash_elasticsearch_password: ""

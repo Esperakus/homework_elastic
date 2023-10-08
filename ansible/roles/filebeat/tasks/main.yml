@@ -1,0 +1,19 @@
+---
+# tasks file for filebeat
+- name: copy rpm to tmp
+  copy:
+    src: files/filebeat-7.17.13-x86_64.rpm
+    dest: /tmp/filebeat-7.17.13-x86_64.rpm
+  
+- name: install filebeat
+  dnf:
+    name: /tmp/filebeat-7.17.13-x86_64.rpm
+    state: present
+    disable_gpg_check: true
+
+- name: copy settings
+  template:
+    src: filebeat.yml
+    dest: /etc/filebeat/filebeat.yml
+  notify: restart filebeat
+    

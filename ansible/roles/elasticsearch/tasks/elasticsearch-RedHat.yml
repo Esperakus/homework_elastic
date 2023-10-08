@@ -6,6 +6,11 @@
   set_fact: allow_downgrade=yes
   when: es_allow_downgrades
 
+# - name: download rpm
+#   get_url:
+#     url: https://mirrors.huaweicloud.com/elasticsearch/7.15.1/elasticsearch-7.15.1-x86_64.rpm
+#     dest: /tmp
+
 # - name: Ensure libselinux-python on CentOS 6.x
 #   become: yes
 #   yum: name=libselinux-python state=present update_cache=yes
@@ -28,11 +33,11 @@
 # - name: RedHat - include versionlock
 #   include: elasticsearch-RedHat-version-lock.yml
 
-- name: RedHat - Remove the other elasticsearch package if switching between OSS and standard
-  become: yes
-  yum:
-    name: '{{ es_other_package_name }}'
-    state: 'absent'
+# - name: RedHat - Remove the other elasticsearch package if switching between OSS and standard
+#   become: yes
+#   yum:
+#     name: '{{ es_other_package_name }}'
+#     state: 'absent'
 
 - name: Include optional user and group creation.
   when: (es_user_id is defined) and (es_group_id is defined)
@@ -40,14 +45,14 @@
 
 - name: copy install to temp
   copy:
-    src: files/elasticsearch-7.17.13-x86_64.rpm
-    dest: /tmp/elasticsearch-7.17.13-x86_64.rpm
+    src: files/elasticsearch-7.15.1-x86_64.rpm
+    dest: /tmp/elasticsearch-7.15.1-x86_64.rpm
 
 - name: RedHat - Install Elasticsearch
   become: yes
   yum:
     # name: '{{ es_package_name }}{% if es_version is defined and es_version != ""  %}-{{ es_version }}{% endif %}'
-    name: /tmp/elasticsearch-7.17.13-x86_64.rpm
+    name: /tmp/elasticsearch-7.15.1-x86_64.rpm
     state: present
     disable_gpg_check: true
   #   update_cache: yes
@@ -64,7 +69,7 @@
 # workaround due to https://github.com/ansible/ansible/issues/66977
 - set_fact:
     # es_rpm_url: "{% if es_version is version('7.0.0', '>=') %}{{ es_package_url }}-{{ es_version }}-x86_64.rpm{% else %}{{ es_package_url }}-{{ es_version }}.rpm{% endif %}"
-    es_rpm_url: "/tmp/elasticsearch-7.17.13-x86_64.rpm"
+    es_rpm_url: "/tmp/elasticsearch-7.15.1-x86_64.rpm"
 
 - name: RedHat - Install Elasticsearch from url
   become: yes

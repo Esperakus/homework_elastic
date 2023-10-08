@@ -22,3 +22,8 @@ ${hostname}
 %{ for hostname in els_hosts ~}
 ${hostname}
 %{ endfor ~}
+
+[kibana]
+%{ for hostname in kibana_host ~}
+${hostname}
+%{ endfor ~}

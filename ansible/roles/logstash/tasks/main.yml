@@ -1,0 +1,50 @@
+---
+# tasks file for logstash
+- name: copy rpm to tmp
+  copy:
+    src: files/logstash-7.17.2-x86_64.rpm
+    dest: /tmp/logstash-7.17.2-x86_64.rpm
+
+# - name: download rpm
+#   get_url:
+#     url: https://mirrors.huaweicloud.com/kibana/7.9.3/kibana-7.9.3-x86_64.rpm
+#     dest: /tmp
+
+- name: Install logstash.
+  dnf:
+    name: "{{ logstash_package }}"
+    state: "{{ logstash_package_state }}"
+    disable_gpg_check: true
+
+- name: Ensure logstash is started and enabled at boot.
+  service:
+    name: "{{ logstash_service }}"
+    state: "{{ logstash_service_state }}"
+    enabled: "{{ logstash_service_enabled }}"
+
+- name: Copy logstash configuration.
+  template:
+    src: "{{ logstash_config_template }}"
+    dest: "{{ logstash_config_file_path }}"
+    owner: root
+    group: root
+    mode: 0644
+  # notify: restart logstash
+
+- name: Copy logstash input configuration.
+  template:
+    src: input.conf.j2
+    dest: /etc/logstash/conf.d/input.conf
+    owner: root
+    group: root
+    mode: 0644
+  # notify: restart logstash
+
+- name: Copy logstash output configuration.
+  template:
+    src: output.conf.j2
+    dest: /etc/logstash/conf.d/output.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart logstash

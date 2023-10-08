@@ -21,3 +21,15 @@ output "internal_ip_address_backend" {
 output "internal_ip_address_db" {
   value = yandex_compute_instance.db.*.network_interface.0.ip_address
 }
+
+output "internal_ip_address_els" {
+  value = yandex_compute_instance.els.*.network_interface.0.ip_address
+}
+
+output "internal_ip_address_kibana" {
+  value = yandex_compute_instance.kibana.*.network_interface.0.ip_address
+}
+
+output "external_ip_address_kibana" {
+  value = yandex_compute_instance.kibana.*.network_interface.0.nat_ip_address
+}
