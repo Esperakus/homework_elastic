@@ -52,7 +52,7 @@ external_ip_address_kibana = [
 Через некоторое время можно зайти на адреса http://{external_ip_address_kibana}:5601/app/observability/overview и http://{external_ip_address_kibana}:5601.app/logs/stream и увидеть, что  производится сбор логов всех узлов проекта с помощью filebeat.
 
 
-Примеры того как выглядят слобранный логи в кибане:
+Примеры того как выглядят слобранные логи в кибане:
 ![alt text](https://github.com/Esperakus/homework_elastic/blob/main/pics/pic1.png)
 ![alt text](https://github.com/Esperakus/homework_elastic/blob/main/pics/pic2.png)
 
