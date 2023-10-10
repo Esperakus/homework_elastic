@@ -47,4 +47,4 @@ external_ip_address_lb = tolist([
         "ip_version" = "ipv4"
 ...
 ```
-Через некоторое время можно зайти на адрес http://{kibana-ip}:5601 и увидеть, что появился индекс, куда производится сбор логов всех узлов проекта с помощью filebeat. 
+Через некоторое время можно зайти на адреса http://{kibana-ip}:5601/app/observability/overview и http://{kibana-ip}:5601.app/logs/stream и увидеть, что  производится сбор логов всех узлов проекта с помощью filebeat.
