@@ -33,20 +33,26 @@ $ terraform init
 ```
 $ terraform apply
 ```
-В выходных данных будут показаны все внешние и внутренни ip адреса. Для проверки работы стенда необходимо в браузере или с помощью curl зайти на ip адрес балансировщика yandex.cloud, который можно посмотреть в выходных данных, например:
+В выходных данных будут показаны все внешние и внутренни ip адреса. 
 
 ```
-Пример вывода terraform apply:
+# Пример вывода terraform apply:
 
-...
-external_ip_address_lb = tolist([
-  {
-    "external_address_spec" = toset([
-      {
-        "address" = "51.250.84.78"
-        "ip_version" = "ipv4"
-...
+Apply complete! Resources: 22 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+external_ip_address_ansible = [
+  "158.160.121.59",
+]
+external_ip_address_kibana = [
+  "158.160.115.67",
+]...
 ```
-Через некоторое время можно зайти на адреса http://{kibana-ip}:5601/app/observability/overview и http://{kibana-ip}:5601.app/logs/stream и увидеть, что  производится сбор логов всех узлов проекта с помощью filebeat.
+Через некоторое время можно зайти на адреса http://{external_ip_address_kibana}:5601/app/observability/overview и http://{external_ip_address_kibana}:5601.app/logs/stream и увидеть, что  производится сбор логов всех узлов проекта с помощью filebeat.
 
-Естественно, надо понимать, что это учебный стенд, здесь прямой доступ в кибану сделан умышленно для удобства, в условиях проадкшена кибана не будет выставляться наружу незапароленная.
+
+Примеры того как выглядят слобранный логи в кибане:
+![alt text](https://github.com/Esperakus/homework_elastic/blob/main/pics/pic1.png)
+![alt text](https://github.com/Esperakus/homework_elastic/blob/main/pics/pic2.png)
+
