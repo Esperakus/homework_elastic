@@ -19,11 +19,11 @@ $ terraform init
 ```
 В результате будет установлен провайдер для подключения к облаку Яндекс.
 
-1. Запустить разворачивание:
+3. Запустить разворачивание:
 ```
 $ terraform apply
 ```
-В выходных данных будут показаны все внешние и внутренни ip адреса. 
+По окончании разворачивания в выходных данных будут показаны все внешние и внутренни ip адреса. 
 
 ```
 # Пример вывода terraform apply:
@@ -41,7 +41,7 @@ external_ip_address_kibana = [
 ...
 ```
 
-Если зайти на адреса http://{external_ip_address_kibana}:5601/app/observability/overview и http://{external_ip_address_kibana}:5601/app/logs/stream, можно увидеть, что  производится сбор логов всех узлов проекта с помощью filebeat.
+Для просмотра логов надо зайти в Кибану по адресам http://{external_ip_address_kibana}:5601/app/observability/overview и http://{external_ip_address_kibana}:5601/app/logs/stream, там можно увидеть статистику сбора логов и сами логи. Также можно настроить фильтры и произвести поиск.
 
 Примеры того как выглядят собранные логи в кибане:
 ![alt text](https://github.com/Esperakus/homework_elastic/blob/main/pics/pic2.png)
