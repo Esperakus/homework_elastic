@@ -6,6 +6,7 @@
 
 
 Схема проекта:
+
 ![alt text](https://github.com/Esperakus/homework_elastic/blob/main/pics/pic3.png)
 
 Для разворачивания проекта необходимо:
